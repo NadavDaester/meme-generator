@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>createAmeme</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+
+<body onload="init()">
     <header>
         <div class="header-container container">
 
-        </div>
-        <div class="gallery container">
-            
         </div>
 
 
         <div class="modal container">
             <canvas id="meme-canvas" width="400" height="400" style="border: 1px solid black;">
-                test canvas
             </canvas>
+            <div class="edit-canvas container">
+                <input class="text-input" type="text">
+                <button onclick="onAddText()">add text</button>
+            </div>
+        </div>
+        <div class="gallery container">
+            <img onclick="onChangeImg(this)" src="meme-imgs (square)/3.jpg" height="200px" width="200px">
+            <img onclick="onChangeImg(this)" src="meme-imgs (square)/2.jpg" height="200px" width="200px">
         </div>
 
+        <img src="" style="display: none;">
     </header>
+    <script src="js/meme.service.js"></script>
     <script src="js/controller.js"></script>
 </body>
+
 </html>

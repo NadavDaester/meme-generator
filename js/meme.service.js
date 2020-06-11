@@ -26,8 +26,8 @@ function resetState(imgSrc) {
         { txt: 'line 1', y: 50, fontSize: '40px', textAlign: 'center', textColor: '#ffffff', strokeColor: '#000000', font: 'Impact' },
         { txt: 'line 2', y: 350, fontSize: '40px', textAlign: 'center', textColor: '#ffffff', strokeColor: '#000000', font: 'Impact' }
     ]
-    gStrokeColorInput.value = gMeme.lines[0].strokeColor;
-    gFillColorInput.value = gMeme.lines[0].textColor;
+    // gStrokeColorInput.value = gMeme.lines[0].strokeColor;
+    // gFillColorInput.value = gMeme.lines[0].textColor;
     selectedImageUrl = imgSrc;   
 }
 
@@ -76,9 +76,9 @@ function drawText(line, isFocus) {
     gCtx.fillStyle = line.textColor;
     gCtx.font = `${line.fontSize} ${line.font}`;
     gCtx.textAlign = line.textAlign;
-    if(isFocus) {
-        gCtx.font = `bold  ${gCtx.font}`;
-    }
+    // if(isFocus) {
+    //     gCtx.font = `bold  ${gCtx.font}`;
+    // }
     var x = line.textAlign == 'center' ? 200 : line.textAlign == 'left' ? 0 : 400;
     gCtx.fillText(line.txt, x, line.y);
     gCtx.strokeText(line.txt, x, line.y);
@@ -106,6 +106,7 @@ function changeImg(elImg) {
     resetState(elImg.src);
     document.querySelector('.editor').style.display = 'flex';
     document.querySelector('.gallery').style.display = 'none';
+    document.querySelector('.about').style.display = 'none';
     renderCanvas()
 }
 
@@ -119,8 +120,6 @@ function increaseFontSize() {
     line.fontSize = +fontArgs[0] + 1 + 'px';
     renderCanvas()
 }
-
-
 
 function decreaseFontSize() {
     var line = getCurrentLine();

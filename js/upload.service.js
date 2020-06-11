@@ -1,14 +1,15 @@
 'use strict'
+
 function openInNewTab(url) {
     var win = window.open(url, '_blank');
     win.focus();
-  }
-// on submit call to this function
+}
+
+  // on submit call to this function
 function uploadImg(elForm, ev) {
     let isExported = true;
     renderCanvas(isExported);
 
-    // ev.preventDefault();
     var elForm = document.querySelector('form');
     document.getElementById('imgData').value = gElCanvas.toDataURL("image/jpeg");
 

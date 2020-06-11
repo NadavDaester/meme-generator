@@ -24,7 +24,7 @@
                 <a href="#">Memes</a>
             </li> -->
             <li>
-                <a href="#">About</a>
+                <a onclick="goToAbout()">About</a>
             </li>
         </ul>
 
@@ -100,7 +100,7 @@
                         <img src="css/ICONS/share-icon.png" class="editor-btn">
                     </div>
                 </form>
-                <a onclick="downloadImg(this)"><div class="img-container">
+                <a onclick="downloadImg(this)" download="my-img.jpg"><div class="img-container">
                     <img src="css/ICONS/download.png" class="editor-btn">
                 </div></a>
             </div>
@@ -109,6 +109,9 @@
     <div class="gallery container">
         <!-- make a img gallery via render in meme-imgs (square)
         <img onclick="changeImg(this)" src="meme-imgs (square)/3.jpg"> -->
+    </div>
+    <div class="about container">
+        this is my meme generator,here you can pick a picture and make an awesome meme
     </div>
     <footer>
         <div class="logo">createAmeme</div>

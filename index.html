@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,31 +9,112 @@
 </head>
 
 <body onload="init()">
-    <header>
-        <div class="nav-bar container">
+    <div class="screen" onclick="toggleMenu()"></div>
+    <header class="main-header flex space-between align-center">
 
-        </div>
-        <div class="modal container flex">
-            <canvas id="meme-canvas" width="400" height="400" style="border: 1px solid black;">
-            </canvas>
-            <div class="edit-canvas container">
-                <input class="text-input"  type="text">
-                <button onclick="onAddText()">add text</button>
-                <div class="move-text container">
-                <button onclick="onIncreaseFont()">increase</button>
-                <button onclick="onDecreaseFont()">decrease</button>
-                <button onclick="onUpText()">up</button>
-                <button onclick="onDownText()">down</button>
+        <div class="logo">createAmeme</div>
+
+        <button class="btn-menu" onclick="toggleMenu()">☰</button>
+
+        <ul class="main-nav flex clean-list">
+            <li>
+                <a onclick="backToGallery()" href="#">Gallery</a>
+            </li>
+            <!-- <li>
+                <a href="#">Memes</a>
+            </li> -->
+            <li>
+                <a href="#">About</a>
+            </li>
+        </ul>
+
+    </header>
+    </div>
+    <div class="editor container">
+        <canvas id="meme-canvas" width="400" height="400" style="border: 1px solid black;">
+        </canvas>
+        <div class="edit-canvas">
+            <input id="text-input" type="text" placeholder="enter a meme" onkeyup="changeText(this)">
+            <div class="move-text  flex">
+                <div class="img-container">
+                    <img src="css/ICONS/arrow up (2).png" class="editor-btn"
+                        onclick="moveUpText()" height="40px">
                 </div>
-                <button onclick="onSwitch()">switch line</button>
+                <!-- <button class="editor-btn" onclick="moveDownText()">down</button> -->
+                <div class="img-container">
+                    <img src="css/ICONS/arrow down.png" class="editor-btn"
+                        onclick="moveDownText()" height="40px">
+                </div>
+                <!-- <button class="editor-btn" onclick="switchLine()">switch line</button> -->
+                <div class="img-container">
+                    <img src="css/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" class="editor-btn"
+                        onclick="switchLine()" height="40px">
+                </div>
+
+                <div class="img-container">
+                    <img src="css/ICONS/add.png" class="editor-btn" onclick="addLine()">
+                </div>
+                <div class="img-container">
+                    <img src="css/ICONS/trash.png" class="editor-btn" onclick=" removeLine()">
+                </div>
+            </div>
+            <div class="edit-text">
+                <div class="img-container">
+                    <img src="css/ICONS/increase font - icon.png" class="editor-btn" onclick="increaseFontSize()">
+                </div>
+                <div class="img-container">
+                    <img src="css/ICONS/decrease font - icon.png" class="editor-btn" onclick=" decreaseFontSize()">
+                </div>
+                <div class="img-container">
+                    <img src="css/ICONS/align-to-left.png" class="editor-btn" onclick=" changeTextAlign('left')">
+                </div>
+                <div class="img-container">
+                    <img src="css/ICONS/center-text-alignment.png" class="editor-btn"
+                        onclick=" changeTextAlign('center')">
+                </div>
+                <!-- <button onclick="changeTextAlign('right')">align right</button> -->
+                <div class="img-container">
+                    <img src="css/ICONS/align-to-right.png" class="editor-btn" onclick=" changeTextAlign('right')">
+                </div>
+                <select name="fonts" form="fontform" onchange="changeFont(this)">
+                    <option value="Impact">Impact</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Comic Sans MS">Comic Sans MS</option>
+                </select>
+                <div class="img-container">
+                    <img src="css/ICONS/text stroke.png" class="editor-btn">
+                    <input type="color" id="stoke-color-input" onchange="changeStrokeColor(this)" value="#ff0000">
+                        
+                </div>
+                <div class="img-container">
+                    <img src="css/ICONS/paint-board-and-brush.png" class="editor-btn">
+                    <input type="color" id="fill-color-input" onchange="changeFillColor(this)" value="#ff0000">
+                </div>
+            </div>
+            <!-- <div class="stickers">stickers</div> -->
+            <div class="media flex">
+                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                    <input name="img" id="imgData" type="hidden" />
+                    <div class="img-container" onclick="uploadImg()">
+                        <img src="css/ICONS/share-icon.png" class="editor-btn">
+                    </div>
+                </form>
+                <a onclick="downloadImg(this)"><div class="img-container">
+                    <img src="css/ICONS/download.png" class="editor-btn">
+                </div></a>
             </div>
         </div>
-        <div class="gallery container">
-            <img onclick="onChangeImg(this)" src="meme-imgs (square)/3.jpg" height="200px" width="200px">
-            <img onclick="onChangeImg(this)" src="meme-imgs (square)/2.jpg" height="200px" width="200px">
-        </div>
-        <img src="" style="display: none;">
-    </header>
+    </div>
+    <div class="gallery container">
+        <!-- make a img gallery via render in meme-imgs (square)
+        <img onclick="changeImg(this)" src="meme-imgs (square)/3.jpg"> -->
+    </div>
+    <footer>
+        <div class="logo">createAmeme</div>
+        <p>all rights reserved 2020</p>
+    </footer>
+    <script src="js/upload.service.js"></script>
     <script src="js/meme.service.js"></script>
     <script src="js/controller.js"></script>
 </body>

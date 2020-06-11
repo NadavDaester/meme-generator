@@ -1,6 +1,23 @@
 'use strict'
-// . Add text input to the HTML and dynamically take the text 
-// line value from the input to gMeme and from it to the Canvas 
 function init() {
-    drawImg()
+    renderCanvas()
+    renderGallery()
+}
+
+
+
+function toggleMenu(){ 
+    document.body.classList.toggle('menu-open');
+}
+function backToGallery(){
+    document.querySelector('.editor').style.display = 'none';
+    document.querySelector('.gallery').style.display = 'block';
+}
+
+
+function downloadImg(elLink) {
+    let isExported = true;
+    renderCanvas(isExported);
+    var imgContent = gElCanvas.toDataURL('image/jpeg');
+    elLink.href = imgContent
 }

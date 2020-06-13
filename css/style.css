@@ -123,6 +123,19 @@ flex-direction: row;
     min-height: calc(100vh - 192px);
 }
 
+/* search */
+.search{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-bar{
+    text-align: center;
+    position: absolute;
+}
+
+
 /* ABOUT */
 .about{
     display: none;
@@ -266,5 +279,8 @@ flex-direction: row;
 @media (max-width: 350px) {
     .container{
         padding-left: unset;
+    }
+    .edit-text *{
+        padding: 0.3rem;
     }
 }

@@ -1,8 +1,9 @@
 'use strict'
 
 function init() {
-    renderCanvas()
-    renderGallery()
+    loadImages();
+    renderCanvas();
+    renderGallery();
 }
 
 function toggleMenu(){ 

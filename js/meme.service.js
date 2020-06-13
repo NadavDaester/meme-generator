@@ -5,14 +5,31 @@ var gTextInput = document.getElementById('text-input');
 var gStrokeColorInput = document.getElementById("stoke-color-input");
 var gFillColorInput = document.getElementById("fill-color-input");
 var gCtx = gElCanvas.getContext('2d');
-var gImgs = [
-    { id: 1, url: 'meme-imgs (square)/2.jpg', keywords: ['happy'] },
-    { id: 2, url: 'meme-imgs (square)/3.jpg', keywords: ['happy'] }
+var gImgs = [];
+var gImgKeywords = [
+    ['Trump', 'Tie', 'Angry', 'Finger', 'Political'],
+    ['Dog', 'Cute', 'Happy', 'Pet'],
+    ['Baby', 'Dog', 'Cute', 'Sleep', 'Pet', 'Relaxed'],
+    ['Cat', 'Tierd', 'Mac', 'Laptop', 'Pet'],
+    ['Angry', 'Green', 'Baby', 'Sea', 'Sand'],
+    ['Hair', 'Science', 'Alien', 'Explain'],
+    ['Baby', 'Suprise', 'Cute', 'Shocked', 'Eyes'],
+    ['Listen', 'Tie', 'Colorful'],
+    ['Baby', 'Evil', 'Cute', 'River', 'Happy', 'Grass'],
+    ['Smile', 'Obama', 'Political', 'Happy'],
+    ['Men', 'Kiss', 'Sport'],
+    ['Saint', 'Finger', 'Point'],
+    ['Drink', 'Cheers', 'Martini', 'Smile', 'Movie'],
+    ['Sunglass', 'Metrix', 'Movie'],
+    ['Rings', 'Lord', 'Movie', 'Statement'],
+    ['Happy', 'Star', 'Movie', 'Evil'],
+    ['Putin', 'Two', 'Political', 'Russia'],
+    ['Toy', 'Movie', 'Explain', 'Animated'],
+    ['Toy', 'Movie', 'Explain', 'Animated'],
 ];
-var selectedImageUrl = gImgs[0].url;
 
 var gMeme = {
-    selectedImgId: 5,
+    selectedImgId: 0,
     selectedLineIdx: 0,
     lines: [
         { txt: 'line 1', y: 50, fontSize: '40px', textAlign: 'center', textColor: '#ffffff', strokeColor: '#000000', font: 'Impact' },
@@ -20,23 +37,34 @@ var gMeme = {
     ]
 }
 
-function resetState(imgSrc) {
+function loadImages() {
+    gImgs = [];
+    for (var i = 1; i <= gImgKeywords.length; i++) {
+        var url = `meme-imgs (square)/${i}.jpg`;
+        gImgs.push(
+            { id: (i - 1), url: url, keywords: gImgKeywords[i - 1] },
+        )
+    }
+
+}
+
+function resetState(imgId) {
     gMeme.selectedLineIdx = 0;
     gMeme.lines = [
         { txt: 'line 1', y: 50, fontSize: '40px', textAlign: 'center', textColor: '#ffffff', strokeColor: '#000000', font: 'Impact' },
         { txt: 'line 2', y: 350, fontSize: '40px', textAlign: 'center', textColor: '#ffffff', strokeColor: '#000000', font: 'Impact' }
     ]
-    // gStrokeColorInput.value = gMeme.lines[0].strokeColor;
-    // gFillColorInput.value = gMeme.lines[0].textColor;
-    selectedImageUrl = imgSrc;   
+    gStrokeColorInput.value = gMeme.lines[0].strokeColor;
+    gFillColorInput.value = gMeme.lines[0].textColor;
+    gMeme.selectedImgId = imgId;
 }
 
 function renderCanvas(isExported) {
     var elImg = new Image();
-    elImg.src = selectedImageUrl;
+    var img = gImgs[gMeme.selectedImgId];
+    elImg.src = img.url;
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
-
 
         for (var i = 0; i < gMeme.lines.length; i++) {
             if (gMeme.lines[i].txt !== '') {
@@ -102,8 +130,8 @@ function moveUpText() {
     renderCanvas();
 }
 
-function changeImg(elImg) {
-    resetState(elImg.src);
+function changeImg(imgId) {
+    resetState(imgId);
     document.querySelector('.editor').style.display = 'flex';
     document.querySelector('.gallery').style.display = 'none';
     document.querySelector('.about').style.display = 'none';
@@ -146,29 +174,33 @@ function switchLine() {
     renderCanvas();
 }
 
-
 function renderGallery() {
     var galleryContainerEl = document.querySelector('.gallery');
-    var numOfImeges = 18;
-    for (var i = 1; i <= numOfImeges; i++) {
-        var node = new Image();
-        galleryContainerEl.innerHTML += `<img onclick = changeImg(this) src="meme-imgs (square)/${i}.jpg">`
+    for (var i = 0; i < gImgs.length - 1; i++) {
+        var img = gImgs[i];
+        galleryContainerEl.innerHTML += `<img onclick = changeImg(${img.id}) title="${img.keywords.join(', ')}" src="${img.url}">`
     }
-
 }
 
-function changeFont(fontSelect){
+function changeFont(fontSelect) {
     gMeme.lines[gMeme.selectedLineIdx].font = fontSelect.value;
     renderCanvas();
 }
 
 
-function changeStrokeColor(colorSelect){
+function changeStrokeColor(colorSelect) {
     gMeme.lines[gMeme.selectedLineIdx].strokeColor = colorSelect.value;
     renderCanvas();
 }
 
-function changeFillColor(colorSelect){
+function changeFillColor(colorSelect) {
     gMeme.lines[gMeme.selectedLineIdx].textColor = colorSelect.value;
     renderCanvas();
+}
+
+
+function searchKeyWords(element){
+var inputText = element;
+console.log(inputText.value);
+// gImgs.sort()
 }
